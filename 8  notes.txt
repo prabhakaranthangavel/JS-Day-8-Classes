@@ -1,0 +1,282 @@
+Contents:
+
+1.Template literals
+2.this keyword
+3.What are classes in js?
+4.constructor
+5.need of setters/getters
+6.use of this keyword in classes
+
+*************************************************************************************************************************
+
+1.Template literals
+
+what is template literals?
+
+===>literals delimited with backtick ( ` ) characters, allowing for multi-line strings,
+string interpolation with embedded expressions, and special constructs called tagged templates.
+
+===>ES6 version.
+
+===>Syntax:
+(` the value of string : $ {}`)
+()--->1
+``--->2
+$---->3
+{}--->4
+
+===>Example:
+const a=50;
+const b=75;
+console.log(`the value of
+a is : ${a}
+b is : ${b}
+sum  : ${a+b}`);  ===>"a" is "b"
+
+output:
+the value of
+a is : 50
+b is : 75
+sum  : 125
+
+Advantages:
+
+===>console.log(`the value of a is : ${a} , b is : ${b},sum  : ${a+b}`);
+Inside the console part this can be given "a" "b".
+console part க்குள் இவ்வாறு (string) கொடுக்க முடியும்.
+
+===>can be given directly underone output with as much space as needed.
+output ஐ ஒன்றன் கீழ் ஒன்றாக வரிசையாக நேரடியாக கொடுக்க இயலும்.எவ்வளவு space வேண்டுமானாலும் தரலாம்.
+
+===>No need to concatenate it's a advantage.
+
+*************************************************************************************************************************
+
+2.this keyword:
+
+what is a this keyword?
+
+===>this keyword refers to a particular object(global object).
+this என்பது ஒரு global object ஐ குறிக்கிறது.
+
+Ex:console.log(this); என்று தரும்போது window என்ற global object மட்டும் வரும் அதில் உள்ள properties ஐ காட்டும். 
+{window: Window, self: Window, document: document, name: '', location: Location and etc}
+
+===>we can print only a specific object.
+
+===>If required we can print only the value of a particular object by giving the name of that value correctly.
+மேலும் தேவை என்றால் இதன் மூலம் ஒரு குறிப்பிட்ட object உடைய value ஐ மட்டும் நாம் print செய்யலாம்.
+அதற்கு அந்த value உடைய பெயரை சரியாக கொடுக்க வேண்டும்.
+
+Ex:console.log(this.screenLeft);    
+o/p : 0
+
+Ex:console.log(this.navigation);    
+o/p :Navigation {currentEntry: NavigationHistoryEntry, transition: null, canGoBack: false, canGoForward: false, onnavigate: null, …}
+
+===>the object depends on immediate context.
+Recent ஆக எந்த object ஐ உருவாக்கினோமோ அதில் உள்ள properties ஐ மட்டுமே நாம் print செய்ய முடியும்.
+
+===>Example:
+const car1 =
+{
+    Brand: "Hyundai",
+    model: "i20",
+    color: "blue",
+    year: "2023",
+    drive: function(){
+    //consoe.log(this.Brand);                     // Hyundai
+    //consoe.log(this);                           //{ Brand: 'Hyundai',model: 'i20',color: 'blue',year: '2023',drive: [Function] }
+    console.log(`you drive the ${this.Brand}`);  //Hyundai ===>using template literals
+                                 Here this refers to an object called a car1.
+                                                                                       இங்கே this என்பது car1 என்ற object ஐ குறிக்கிறது.
+    }
+}    
+const car2 ={
+     Brand : "Volvo",
+     model: "x90",
+     color: "black",
+     year: "2023",
+     drive: function(){
+         console.log(`you drive the ${this.Brand}`);  //Volvo===>using template literals
+                                      Here this refers to an object called a car1.
+                                                                                                    இங்கே this என்பது car2 என்ற object ஐ குறிக்கிறது.
+      }
+}
+car1.drive();      //function call===>objname.funcname
+car2.drive();
+
+output:
+you drive the Hyundai
+you drive the Volvo
+
+===>If we give some function inside an object and class it is not considered as a function. 
+Let's call it a method.
+ஒரு object மற்றும் class க்குள் ஏதாவது function கொடுத்தால் அது function ஆக எடுத்துக்கொள்ளாது.
+அதனை Method என்று அழைப்போம்.
+
+*************************************************************************************************************************
+
+3.classes
+
+what is class?
+
+===>A blueprint of creating object.
+A class describes what an object should look like.
+ஒரு object ஆனது எவ்வாறு இருக்க வேண்டும் என்று விவரிப்பது class ஆகும்.
+
+===>It defines properties and methods.
+
+===>properties means constructor
+    methods means setters/getters
+
+===>Syntax:
+class classname{
+    
+}
+
+===>The class name must always be a capital letter in the syntax.
+Syntaxல், class name எப்பொழுதுமே Capital Letter ஆக இருக்கும் வேண்டும்.
+
+===>Example:
+
+class Car{
+    drive(){
+     console.log("Driving the car")
+    }
+    brake(){
+     console.log("applying the brake")
+    }
+}
+
+//We are creating a car object using car class:
+let car1 = new Car() // let car = new classname()
+car1.drive();
+car1.brake();
+
+//We can resue the class n number of times
+let car2 = new Car() // let car = new classname()
+car2.drive();
+car2.brake();
+
+*************************************************************************************************************************
+
+4.constructor
+
+what is constructor?
+
+===>A special method for assiging properties.
+ஒரு properties ஐ assign பண்ணுவதற்காக நாம் கொடுக்கக்கூடிய method தான் constructor ஆகும்.
+
+===>Automatically called when class created.
+Class ஐ உருவாக்கும் போது தானாகவே அழைக்கப்படும்.
+
+===>properties means constructor.
+
+===>what is Properties?
+    car=>brand,model,color,weight
+    movie=>title,poster,actor,actress
+    person=>name,ph no,email,qualification ===>this is called "properties"
+    இந்த properties ஐ assign இந்த செய்ய பயன்படுத்தும் method தான் constructor.
+
+===>Example:
+class Car{
+  constructor(brand,model,color,year){
+  this.brand=brand;
+  this.model=model;
+  this.color=color;
+  this.year=year;
+   }
+   drive(){
+        console.log("Driving the car")
+       }
+       brake(){
+        console.log("applying the brake")
+       }
+} 
+let car1 = new Car("Hyundai","i20","red",2023)
+let car2 = new Car("Volvo","X90","black",2022)
+let car3 = new Car("Nexa","Baleno","blue",2023)
+let car4 = new Car("Mahindra","Thar","white",2022)
+
+console.log(`All the car colors :
+"car1" :${car1.color} 
+"car2": ${car2.color} 
+"car3": ${car3.color} 
+"car4": ${car4.color}`)
+
+console.log(car1);
+console.log(car1.brand);
+console.log(car1.model);
+console.log(car1.color);
+console.log(car1.year);
+
+console.log(car2);
+console.log(car2.brand);
+console.log(car2.model);
+console.log(car2.color);
+console.log(car2.year);
+
+console.log(car3);
+console.log(car3.brand);
+console.log(car3.model);
+console.log(car3.color);
+console.log(car3.year);
+
+console.log(car4);
+console.log(car4.brand);
+console.log(car4.model);
+console.log(car4.color);
+console.log(car4.year);
+
+*************************************************************************************************************************
+
+5.getter and setters
+
+what is getter?
+
+===>getter is a get user data.
+
+===>binds an object property to a function when the property is accepted.
+
+what is setter?
+
+===>setter is a set user data.
+
+===>binds an object property to a function when the property is assigned with a value.
+
+===>Example:
+
+var users={
+  get name(){
+    console.log("getting a name")
+    return this._name
+  },
+  set name(n){
+   console.log("setting a name"+" "+n)
+   this._name =n
+  }
+}
+users.name ="Alice" 
+console.log(users.name);
+
+
+===>real time Example:
+class Car{
+    constructor(power){
+       
+        this._power = power;
+    }
+    get power(){
+       
+        console.log(`${this._power}hp`) // 400hp
+    }
+   set power(n){
+      
+        console.log(`${this._power=n}`)  // 400
+    }
+}
+let car1 = new Car(400);
+console.log(car1.power)
+
+*************************************************************************************************************************
